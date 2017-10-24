@@ -1,0 +1,12 @@
+#bus_jumbo{
+    background-image: url("../img/bg.jpg");
+    height: 410px;
+    background-size: 1360px;
+    background-position: center;
+}
+.box-center{
+    display: flex;
+/*  flex-direction: row;*/
+    justify-content: center;
+    align-items: center;
+}
