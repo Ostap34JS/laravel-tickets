@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\UsersBuy;
 use App\Models\Tickets;
 use App\Http\Requests\ValidatePayTicket;
+use Illuminate\Support\Collection;
 
 class BuyController extends Controller
 {
@@ -29,26 +30,31 @@ class BuyController extends Controller
 
     public function payTicket(ValidatePayTicket $request)
     {
-        $UsersBuy = new UsersBuy;
-        
+        $id = $request->ticket_id;
+        $ticket = Tickets::select('number_passenger', 'limit_passenger')->where(['id' => $id])->first();
 
-        $UsersBuy->first_name   = $request->first_name;
-        $UsersBuy->last_name    = $request->last_name;         
-        $UsersBuy->phone_number = $request->phone_number;
-        $UsersBuy->email        = $request->email;
-        $UsersBuy->ticket_id    = $request->ticket_id;
-        $UsersBuy->status       = false;
-        
+        if($ticket->number_passenger < $ticket->limit_passenger){
 
-        $UsersBuy->save();
+            $UsersBuy = new UsersBuy;
+            $UsersBuy->first_name   = $request->first_name;
+            $UsersBuy->last_name    = $request->last_name;         
+            $UsersBuy->phone_number = $request->phone_number;
+            $UsersBuy->email        = $request->email;
+            $UsersBuy->ticket_id    = $request->ticket_id;
+            $UsersBuy->status       = false;
+            $UsersBuy->save();
+            
+            
+            $id = $UsersBuy->ticket_id;
+            $ticket = Tickets::find($id);            
+            $ticket->number_passenger += 1;
 
+            $ticket->save();  
 
-        $id = $UsersBuy->ticket_id;
-        $ticket = Tickets::find($id);            
-        $ticket->number_passenger += 1;
-
-        $ticket->save();   
-
+            echo("Вас додано до списку пасажирів...");
+        }else{
+            echo 'Вільних місць не залишилось... ';
+        }
 
     }
 }
