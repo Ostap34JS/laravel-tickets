@@ -32,4 +32,11 @@ Route::post('/pay', 'BuyController@payTicket');
 
 Route::get('ticket/{id}', ['as'=>'ticket.id', 'uses'=> 'BuyController@buyTicket']);
 
-//Route::get('/admin2b7dyk75','');
+Auth::routes();
+
+Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
+    Route::resource('tickets', 'TicketController');
+    Route::resource('books', 'BooksController');
+});
+
+Route::get('/home', 'HomeController@index')->name('home');

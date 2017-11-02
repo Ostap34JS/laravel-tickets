@@ -10,3 +10,32 @@
     justify-content: center;
     align-items: center;
 }
+/*
+    ____                          _   _   ____                           _             _                  
+   / ___|    ___   _ __    ___   | | | | | __ )    __ _   _ __     ___  | |_   _   _  | |   ___   ___   _ 
+   \___ \   / __| | '__|  / _ \  | | | | |  _ \   / _` | | '__|   / __| | __| | | | | | |  / _ \ / __| (_)
+    ___) | | (__  | |    | (_) | | | | | | |_) | | (_| | | |      \__ \ | |_  | |_| | | | |  __/ \__ \  _ 
+   |____/   \___| |_|     \___/  |_| |_| |____/   \__,_| |_|      |___/  \__|  \__, | |_|  \___| |___/ (_)
+                                                                               |___/                      
+*/
+/*.visible-scrollbar, .invisible-scrollbar, .mostly-customized-scrollbar {
+    display: block;
+    width: 10em;
+    overflow: auto;
+    height: 2em;
+  }*/
+  .invisible-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Demonstrate a "mostly customized" scrollbar
+   * (won't be visible otherwise if width/height is specified) */
+  .mostly-customized-scrollbar::-webkit-scrollbar {
+    width: 13px;
+    height: 8px;
+    background-color: #a5a4a4; /* or add it to the track */
+  }
+  /* Add a thumb */
+  .mostly-customized-scrollbar::-webkit-scrollbar-thumb {
+      background: #40974f; 
+  }

@@ -7,14 +7,27 @@ use Illuminate\Database\Eloquent\Model;
 class Tickets extends Model
 {
     protected $table = 'tickets';
-    
-/*    public function bus() {
-        return $this->hasManyThrough(
-            'App\Models\Tickets',
-            'App\Models\Bus',
-            'bus_id', // Foreign key on users table...
-            'id' // Foreign key on posts table...
-        );   
-    }*/ 
+
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'from_city_id', 
+        'to_city_id',
+        'bus_id','limit_passenger', 'price', 'date',
+    ];
+
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'remember_token',
+    ];
 
 }
